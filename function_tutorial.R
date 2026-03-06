@@ -1,7 +1,7 @@
 # Demonstration - writing functions for numerical data
 
 # Input
-x <- c(-23, -14, 23, 4, -9, 2, 8, -21, 5, 23, 76, 23, -28, 23, 1, 0, 67, 48)
+x <- c(-10:10)
 
 # Task - Given an input x, return the rectified linear unit, defined as max(x, 0)
 
