@@ -5,7 +5,7 @@ x <- c(-23, -14, 23, 4, -9, 2, 8, -21, 5, 23, 76, 23, -28, 23, 1, 0, 67, 48)
 
 # Task - Given an input x, return the rectified linear unit, defined as max(x, 0)
 
-# Relu with no function:
+# Relu of x using max() function:
 
 max(c(-23, 0))
 max(c(-14, 0))
@@ -13,18 +13,19 @@ max(c(23, 0))
 # This is not very efficient
 
 
-# Relu function:
+# Wrap max() inside relu function:
 
 relu <- function(x) {
   return(max(c(x, 0)))
 }
 
-# y <- relu(x) returns an error, as we cannot apply our function to a vector!
-
 relu(-23)
 relu(-14)
 relu(23)
-# This is only marginally more efficient than no function...
+# This is has saved us only a bit of typing...
+
+# The real problem: y <- relu(x) returns an error, as we cannot apply our 
+# function to a vector!
 
 
 # Solution: Relu function with a loop:
@@ -41,7 +42,7 @@ y <- relu_loop(x)
 
 plot(x, y, sub="Rectified linear unit with loops")
 
-# Better solution: Relu with lapply
+# Better solution: Original relu function with lapply
 
 y <- lapply(x, relu)
 
