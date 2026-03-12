@@ -5,45 +5,57 @@ x <- c(-10:10)
 
 # Task - Given an input x, return the rectified linear unit, defined as max(x, 0)
 
-# Relu with no function at all :
-for (i in 1:21) {
+# Relu with no functions
+
+# (It's nearly impossible to *actually* write R code with no functions at all, 
+# we're still using c and length)
+
+y <- c()
+for (i in 1:length(x)) {
   if (x[i] > 0) {
-    print(x[i])
+    y <- c(y, x[i])
   } else {
-    print(0)
+    y <- c(y, 0)
   }
 }
+y
 
-# Ugly to read, doesn't give us a reusable output
+plot(x, y, sub="Rectified linear unit with for loop")
 
-# Relu of x using max() function:
+# Ugly to read, and it isn't reusable. If we x changed later, we would have to copy this code
+# to reassign y
+
+# Relu of x using max function:
+
+y <- c()
 for (i in 1:length(x)) {
-  print(max(c(x[i], 0)))
+  y <- c(y, max(c(x[i], 0)))
 }
+y
 
-# Cleaner code because we replaced the conditional with the max() function,
-# but still doesn't give us a reusable output
+plot(x, y, sub="Rectified linear unit with max function")
+
+# Cleaner code because we replaced the conditional with the max function, but it still isn't reusable
 
 
-# How do we write some actually useful code? 
+# How do we write some good code? 
 # The answer is always: functions, and functions are at their best when they call other functions!
 
-# Step 1: Wrap max() inside relu function:
+# Step 1: Wrap max() inside relu() that will take a single parameter, x:
 
 relu <- function(x) {
   return(max(c(x, 0)))
 }
 
-# Step 2: resolve the problem of applying max() to a vector
+# Step 2: resolve the problem of applying relu() to a vector
 
-# We could use a loop again, but there is much better way:
+# We could use a loop again, but there is much better way: the lapply function
 
 y <- lapply(x, relu)
 
 plot(x, y, sub="Rectified linear unit with lapply")
 
-# This method extends to using a tibble/DataFrame
-library(dplyr)
+# Where this really shines is when it extends to DataFrames:
 
 df <- tibble(x)
 
@@ -51,7 +63,8 @@ df$y <- lapply(df$x, relu)
 
 plot(df, sub="Dataframe plot")
 
-# The best code: tidyverse style
+# Elite R code: tidyverse style
+
 df <- tibble(x)
 
 df |>
