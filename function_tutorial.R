@@ -8,7 +8,7 @@ x <- c(-10:10)
 # Relu with no functions
 
 # (It's nearly impossible to *actually* write R code with no functions at all, 
-# we're still using c and length)
+# as we're still using c, length and plot)
 
 y <- c()
 for (i in 1:length(x)) {
@@ -18,21 +18,17 @@ for (i in 1:length(x)) {
     y <- c(y, 0)
   }
 }
-y
-
 plot(x, y, sub="Rectified linear unit with for loop")
 
-# Ugly to read, and it isn't reusable. If we x changed later, we would have to copy this code
+# Hard to read, and it isn't reusable. If we x changed later, we would have to copy this code
 # to reassign y
 
-# Relu of x using max function:
+# Marginal improvement: Relu of x using max function:
 
 y <- c()
 for (i in 1:length(x)) {
   y <- c(y, max(c(x[i], 0)))
 }
-y
-
 plot(x, y, sub="Rectified linear unit with max function")
 
 # Cleaner code because we replaced the conditional with the max function, but it still isn't reusable
@@ -56,14 +52,14 @@ y <- lapply(x, relu)
 plot(x, y, sub="Rectified linear unit with lapply")
 
 # Where this really shines is when it extends to DataFrames:
-
-df <- tibble(x)
+df <- data.frame(x)
 
 df$y <- lapply(df$x, relu)
 
 plot(df, sub="Dataframe plot")
 
 # Elite R code: tidyverse style
+library(tidyverse)
 
 df <- tibble(x)
 
