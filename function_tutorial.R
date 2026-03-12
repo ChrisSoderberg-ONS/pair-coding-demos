@@ -5,51 +5,44 @@ x <- c(-10:10)
 
 # Task - Given an input x, return the rectified linear unit, defined as max(x, 0)
 
+# Relu with no function at all :
+for (i in 1:21) {
+  if (x[i] > 0) {
+    print(x[i])
+  } else {
+    print(0)
+  }
+}
+
+# Ugly to read, doesn't give us a reusable output
+
 # Relu of x using max() function:
+for (i in 1:length(x)) {
+  print(max(c(x[i], 0)))
+}
 
-max(c(-23, 0))
-max(c(-14, 0))
-max(c(23, 0))
-# This is not very efficient
+# Cleaner code because we replaced the conditional with the max() function,
+# but still doesn't give us a reusable output
 
 
-# Wrap max() inside relu function:
+# How do we write some actually useful code? 
+# The answer is always: functions, and functions are at their best when they call other functions!
+
+# Step 1: Wrap max() inside relu function:
 
 relu <- function(x) {
   return(max(c(x, 0)))
 }
 
-relu(-23)
-relu(-14)
-relu(23)
-# This is has saved us only a bit of typing...
+# Step 2: resolve the problem of applying max() to a vector
 
-# The real problem: y <- relu(x) returns an error, as we cannot apply our 
-# function to a vector!
-
-
-# Solution: Relu function with a loop:
-
-relu_loop <- function(x) {
-  output <- c()
-  for (i in 1:length(x)) {
-    output <- c(output, relu(x[i]))
-  }
-  return(output)
-}
-
-y <- relu_loop(x)
-
-plot(x, y, sub="Rectified linear unit with loops")
-
-# Better solution: Original relu function with lapply
+# We could use a loop again, but there is much better way:
 
 y <- lapply(x, relu)
 
 plot(x, y, sub="Rectified linear unit with lapply")
 
 # This method extends to using a tibble/DataFrame
-
 library(dplyr)
 
 df <- tibble(x)
@@ -58,7 +51,7 @@ df$y <- lapply(df$x, relu)
 
 plot(df, sub="Dataframe plot")
 
-# Or tidyverse style,
+# The best code: tidyverse style
 df <- tibble(x)
 
 df |>
