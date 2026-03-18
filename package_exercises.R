@@ -4,7 +4,7 @@
 # Exercise 1 — Create a new package
 
 # Task:
-#   Use usethis::create_package("path/to/mypkg") to create a package in a folder of your choosing.
+#   Use usethis::create_package("") to create a package in a folder of your choosing.
 #
 # Steps:
 #   1. Load the usethis and devtools packages.

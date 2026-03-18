@@ -21,7 +21,7 @@ library(devtools)
 #   - R/ folder -> where you will put your R scripts (functions)
 #   - .Rproj file (if using RStudio)
 
-usethis::create_package("path/to/mypkg")
+usethis::create_package("")
 
 ###############################################################
 

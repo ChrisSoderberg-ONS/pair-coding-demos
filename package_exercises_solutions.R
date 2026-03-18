@@ -9,7 +9,7 @@ library(devtools)
 
 # Create the package
 
-# usethis::create_package("path/to/mypkg")
+# usethis::create_package("")
 
 ###############################################################
 
